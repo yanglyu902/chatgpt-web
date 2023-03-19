@@ -33,11 +33,6 @@
   <p class="menu-label">Actions</p>
   <ul class="menu-list">
     <li>
-      <a href={"#/"} class="panel-block" class:is-disabled={!apiKey} class:is-active={!activeChatId}
-        ><span class="greyscale mr-2">🔑</span> API key</a
-      >
-    </li>
-    <li>
       <a href={"#/chat/new"} class="panel-block" class:is-disabled={!apiKey}
         ><span class="greyscale mr-2">➕</span> New chat</a
       >
@@ -66,5 +61,14 @@
         >
       </li>
     {/if}
+    <li>
+        <!-- add an empty block -->
+        <br><br>
+    </li>
+    <li>
+        <a href={"#/"} class="panel-block" class:is-disabled={!apiKey} class:is-active={!activeChatId}
+          ><span class="greyscale mr-2">🔑</span> API key</a
+        >
+    </li>
   </ul>
 </aside>

@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { Highlight } from "svelte-highlight";
-
+  import {Highlight, LineNumbers} from "svelte-highlight";
   // Import both dark and light styles
-  import { github, githubDark } from "svelte-highlight/styles";
+  import { github, githubDark, atomOneDark } from "svelte-highlight/styles";
 
   // Style depends on system theme
-  const style = window.matchMedia("(prefers-color-scheme: dark)").matches ? githubDark : github;
+  const style = window.matchMedia("(prefers-color-scheme: dark)").matches ? atomOneDark : github;
 
   // Copy function for the code block
   import copy from "copy-to-clipboard";
@@ -69,7 +68,7 @@
       language = php;
       break;
     default:
-      language = plaintext;
+      language = python;
   }
 
   // For copying code - reference: https://vyacheslavbasharov.com/blog/adding-click-to-copy-code-markdown-blog
@@ -89,12 +88,12 @@
     const codeBlock = (nextElement.querySelector("pre > code") as HTMLPreElement).innerText;
     copy(codeBlock);
 
-    // Restored the button after copying the text in 1 second.
+    // Restored the button after copying the text in 2 second.
     setTimeout(() => {
       clickedElement.innerHTML = originalButtonContent;
       clickedElement.classList.remove("is-success");
       clickedElement.blur();
-    }, 1000);
+    }, 2000);
   };
 </script>
 
@@ -104,5 +103,22 @@
 
 <div class="code-block is-relative">
   <button class="button is-light is-outlined is-small p-2" on:click={copyFunction}>Copy</button>
-  <Highlight code={text} {language} />
+  <Highlight code={text} language={language} />
+
+    <!-- <Highlight language={language} code={text} let:highlighted>
+        <LineNumbers {highlighted} hideBorder={true}
+        --padding-left="1em"
+        --padding-right="1em"
+        />
+    </Highlight> -->
+
+
+    <!-- <Highlight language={language} code={text} let:highlighted>
+        <div style="--lh: ;">
+          <pre>
+            <LineNumbers {highlighted} hideBorder={true} style="--padding-left: 0.5em; --padding-right: 0.5em; --background-color: #f7f7f7;" />
+            {highlighted}
+          </pre>
+        </div>
+      </Highlight> -->
 </div>

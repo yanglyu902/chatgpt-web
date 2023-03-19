@@ -16,7 +16,8 @@
   import { afterUpdate, onMount } from "svelte";
   import { replace } from "svelte-spa-router";
   import SvelteMarkdown from "svelte-markdown";
-
+//   import katex from "katex";
+  
   export let params = { chatId: undefined };
   let chatId: number = parseInt(params.chatId);
   let updating: boolean = false;
@@ -37,9 +38,9 @@
     {
       key: "temperature",
       name: "Sampling Temperature",
-      default: 1,
+      default: 0.7,
       min: 0,
-      max: 2,
+      max: 1,
       step: 0.1,
       type: "number",
     },
@@ -115,7 +116,13 @@
         // Stop speech recognition, submit the form and remove the pulse
         const last = event.results.length - 1;
         const text = event.results[last][0].transcript;
-        input.value = text;
+        input.value = text; // NOTE: original
+
+        // input.value = '';
+        // input.dispatchEvent(new Event('input'));
+        // const math = katex.renderToString(text);
+        // input.dispatchEvent(new CustomEvent('insert', { detail: { text: math } }));
+
         recognition.stop();
         recording = false;
         submitForm(true);
@@ -492,6 +499,7 @@
                   max={setting.max}
                   step={setting.step}
                   placeholder={String(setting.default)}
+                  contenteditable="true"
                 />
               {:else if setting.type === "select"}
                 <div class="select">
