@@ -7,6 +7,17 @@
   }
 }
 
+#app {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100vh;
+
+  section.section{
+    flex-grow: 1;
+  }
+}
+
 .rotate {
   animation: rotating 10s linear infinite;
 }
@@ -54,7 +65,8 @@ a.is-disabled {
 
 /* Style the chat input */
 .chat-input {
-  overflow-y:hidden;
+  overflow-y: hidden;
+  resize: vertical;
 }
 
 $footer-padding: 3rem 1.5rem;
@@ -88,7 +100,7 @@ $modal-background-background-color-dark: rgba($dark, 0.8) !default; // remove th
 }
 
 /* Support for copy code button */
-.code-block>button {
+.code-block > button {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -98,4 +110,13 @@ $modal-background-background-color-dark: rgba($dark, 0.8) !default; // remove th
 .menu {
   position: sticky;
   top: 1rem;
+}
+
+/* Loading chat messages */
+.is-loading {
+  opacity: 0.5;
+  @include loader;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 0.25em;
 }
