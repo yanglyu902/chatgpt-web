@@ -16,7 +16,7 @@
   } from './Types.svelte'
   import Code from './Code.svelte'
 
-  import { afterUpdate, onMount, createEventDispatcher } from "svelte";
+  import { afterUpdate, onMount } from "svelte";
   import { replace } from "svelte-spa-router";
   import SvelteMarkdown from "svelte-markdown";
 

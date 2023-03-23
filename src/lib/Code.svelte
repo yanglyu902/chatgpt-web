@@ -3,7 +3,7 @@
   import flourite from 'flourite'
 
   // Import both dark and light styles
-  import { github, githubDark, atomOneDark } from 'svelte-highlight/styles'
+  import { github, atomOneDark } from 'svelte-highlight/styles'
 
   // Style depends on system theme
   const style = window.matchMedia('(prefers-color-scheme: dark)').matches ? atomOneDark : github
@@ -22,7 +22,7 @@
     sql,
     shell,
     php,
-    plaintext,
+    // plaintext,
     yaml,
     type LanguageType
   } from 'svelte-highlight/languages'
