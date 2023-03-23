@@ -16,8 +16,17 @@
   import { afterUpdate, onMount } from "svelte";
   import { replace } from "svelte-spa-router";
   import SvelteMarkdown from "svelte-markdown";
+//   import type { BlockMath, InlineMath } from "react-katex";
+//   import 'katex/dist/katex.min.css';
 //   import katex from "katex";
-  
+//   import KaTeX from "svelte-katex";
+//   import marked from 'marked';
+//   import Katex from 'marked-katex-extension';
+
+// import marked from "https://cdn.jsdelivr.net/gh/markedjs/marked/lib/marked.esm.js";
+// import markedKatex from "https://cdn.jsdelivr.net/gh/UziTech/marked-katex-extension/lib/index.mjs";
+
+
   export let params = { chatId: undefined };
   let chatId: number = parseInt(params.chatId);
   let updating: boolean = false;
@@ -116,13 +125,7 @@
         // Stop speech recognition, submit the form and remove the pulse
         const last = event.results.length - 1;
         const text = event.results[last][0].transcript;
-        input.value = text; // NOTE: original
-
-        // input.value = '';
-        // input.dispatchEvent(new Event('input'));
-        // const math = katex.renderToString(text);
-        // input.dispatchEvent(new CustomEvent('insert', { detail: { text: math } }));
-
+        input.value = text;
         recognition.stop();
         recording = false;
         submitForm(true);
@@ -247,7 +250,7 @@
   const suggestName = async (): Promise<void> => {
     const suggestMessage: Message = {
       role: "user",
-      content: "Can you give me a 5 word summary of this conversation's topic?",
+      content: "Summarize our conversation with four to five words ONLY. Directly return your answer without any explanation or additional words. Do not include any quotation marks.",
     };
     addMessage(chatId, suggestMessage);
 
@@ -281,7 +284,7 @@
 
     // Load available models from OpenAI
     const allModels = (await (
-      await fetch("https://api.openai.com/v1/models", {
+      await fetch("https://api.openai.com/v1/chat/completions", { // default: v1/models
         method: "GET",
         headers: {
           Authorization: `Bearer ${$apiKeyStorage}`,
@@ -407,7 +410,7 @@
       </div>
     </article>
   {:else}
-    <article class="message is-success">
+    <article class="message is-success assistant-message">  <!-- DEBUG: small bug -->
       <div class="message-body content">
         <SvelteMarkdown
           source={message.content}
