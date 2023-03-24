@@ -22,10 +22,8 @@
 
   import {marked} from "marked";
   import markedKatex from "marked-katex-extension";
-//   import "./styles.css"
 
   const options = {
-    // minRuleThickness: 0.1,
     throwOnError: false
   };
 
