@@ -15,15 +15,17 @@
     supportedModels
   } from './Types.svelte'
   import Code from './Code.svelte'
-
+  
   import { afterUpdate, onMount } from "svelte";
   import { replace } from "svelte-spa-router";
   import SvelteMarkdown from "svelte-markdown";
 
   import {marked} from "marked";
   import markedKatex from "marked-katex-extension";
+//   import "./styles.css"
 
   const options = {
+    // minRuleThickness: 0.1,
     throwOnError: false
   };
 
